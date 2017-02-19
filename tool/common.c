@@ -1,3 +1,10 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <unistd.h>
+#include <errno.h>
 
 #define ERR_EXIT(m) \
 	do { \
@@ -95,4 +102,19 @@ ssize_t readline(int sockfd, void *buf, size_t maxline)
 		pbuf += nread;
 	}
 	return -1;
+}
+
+int getlocalip(char* ip, int n) 
+{
+    if (ip == NULL || n < 9)
+        return -1;
+    char hostname[128] = {0};
+    if(gethostname(hostname, sizeof(hostname)) == -1)
+        return -1;
+    
+    struct hostent *ht = gethostbyname(hostname);
+    if (ht == NULL)
+        return -1;
+    memcpy(ip, inet_ntoa(*(struct in_addr*)ht->h_addr), 9);
+    return 0;
 }
