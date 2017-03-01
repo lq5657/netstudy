@@ -59,4 +59,6 @@ int main()
 		if ((ret = write(connfd, recvBuf, strlen(recvBuf))) == -1)
 			ERR_EXIT("write");
 	}
+	close(connfd);
+	close(listenfd);
 }
