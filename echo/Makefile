@@ -1,7 +1,7 @@
 .PHONY:clean all
 CC = gcc
 CFLAGS = -Wall -g
-BIN = echosrv echocli echosrvmulti echoclimulti p2psrv p2pcli stickpackagecli stickpackagesrv stickpackagecli_2 stickpackagesrv_2
+BIN = echosrv echocli echosrvmulti echoclimulti p2psrv p2pcli stickpackagecli stickpackagesrv stickpackagecli_2 stickpackagesrv_2 select_echocli select_echosrv
 all:$(BIN)
 %.o:%.c
 	$(CC) $(CFLAGS) -c $< -o $@
